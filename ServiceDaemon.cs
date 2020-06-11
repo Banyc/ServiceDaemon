@@ -31,10 +31,8 @@ namespace ServiceDaemon
         Process process = null;
         ServiceDaemonOption option;
 
-        // TODO: make it works
         private void ProcessDown(object sender, EventArgs e) 
         {
-            // ResumeProcessAsync().Wait();
             Console.WriteLine("[INFO] Process is down");
         }
 
@@ -86,18 +84,14 @@ namespace ServiceDaemon
             {
                 await Task.Delay(this.option.RestartSpan);
                 await RestartAsync();
-                // Restart();
             }
         }
 
         private async Task RestartAsync()
-        // private void Restart()
         {
             Console.WriteLine("[INFO] Stop process");
             this.process.Kill();
             this.process.WaitForExit();
-            // this.process.CloseMainWindow();
-            // this.process.StandardInput.Close();
             this.process.Close();
             await ResumeProcessAsync();
         }
